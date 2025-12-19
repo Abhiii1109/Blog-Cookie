@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= blog.title %> - Minimal Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <a href="/blogs">Minimal Blog</a>
+      </div>
+      <div class="nav-links">
+        <% if (typeof user !== 'undefined' && user) { %>
+          <span class="user-name">Hello, <%= user.name %></span>
+          <a href="/blogs/create" class="nav-link">Create Blog</a>
+          <a href="/logout" class="nav-link btn-outlined">Logout</a>
+        <% } else { %>
+          <a href="/login" class="nav-link">Login</a>
+          <a href="/register" class="nav-link btn-outlined">Sign Up</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container-small">
+      <a href="/blogs" class="back-link">← Back to all blogs</a>
+      
+      <article class="blog-detail">
+        <h1 class="blog-detail-title"><%= blog.title %></h1>
+        
+        <div class="blog-detail-meta">
+          <span class="blog-author">By <%= blog.author.name %></span>
+          <span class="blog-date"><%= new Date(blog.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+        </div>
+
+        <div class="blog-detail-content">
+          <%= blog.content %>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> Minimal Blog. A clean blogging platform.</p>
+    </div>
+  </footer>
+</body>
+</html>

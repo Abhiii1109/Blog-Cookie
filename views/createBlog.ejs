@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Blog - Minimal Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <a href="/blogs">Minimal Blog</a>
+      </div>
+      <div class="nav-links">
+        <% if (typeof user !== 'undefined' && user) { %>
+          <span class="user-name">Hello, <%= user.name %></span>
+          <a href="/blogs/create" class="nav-link">Create Blog</a>
+          <a href="/logout" class="nav-link btn-outlined">Logout</a>
+        <% } else { %>
+          <a href="/login" class="nav-link">Login</a>
+          <a href="/register" class="nav-link btn-outlined">Sign Up</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container-small">
+      <div class="page-header">
+        <h1>Create New Blog Post</h1>
+        <p>Share your thoughts with the community</p>
+      </div>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+        <div class="error-message"><%= error %></div>
+      <% } %>
+
+      <div class="form-card">
+        <form action="/blogs/create" method="POST" class="blog-form">
+          <div class="form-group">
+            <label for="title">Blog Title</label>
+            <input 
+              type="text" 
+              id="title" 
+              name="title" 
+              placeholder="Enter a catchy title"
+              maxlength="200"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="content">Content</label>
+            <textarea 
+              id="content" 
+              name="content" 
+              rows="12" 
+              placeholder="Write your blog content here..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <a href="/blogs" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Publish Blog</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> Minimal Blog. A clean blogging platform.</p>
+    </div>
+  </footer>
+</body>
+</html>
